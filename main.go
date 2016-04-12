@@ -31,12 +31,12 @@ func main() {
         TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
     }
     client := &http.Client{Transport: tr}
-	
+	baseUrl = os.Args[1]
 	argCount := len(os.Args[1:])
 	fmt.Println("***********************************************")
-	if (argCount >=2){
-		host = os.Args[1]
-		port,_ = strconv.Atoi(os.Args[2])
+	if (argCount >=3){
+		host = os.Args[2]
+		port,_ = strconv.Atoi(os.Args[3])
 
 	req, err := http.NewRequest("GET", baseUrl + taskApi, nil)
 	req.SetBasicAuth("synthetic-mon","VpYdy5abudqkk3Ts")
@@ -74,8 +74,8 @@ func main() {
 	if(!flag){
 		fmt.Println("No record found.");
 	}
-	}else if (argCount >=1){
-		appid = os.Args[1]
+	}else if (argCount >=2){
+		appid = os.Args[2]
 		appid = strings.Replace(appid, "/", "", -1)
 		req, err := http.NewRequest("GET", baseUrl+applicationApi+"/"+appid, nil)
 					req.SetBasicAuth("synthetic-mon","VpYdy5abudqkk3Ts")
